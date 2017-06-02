@@ -1,8 +1,9 @@
-----------
-Fri, 2 Jun
-----------
+# ----------
+# Fri, 2 Jun
+# ----------
 
-please e-mail use Canvas for personal issue
+"""
+please e-mail via Canvas for personal issue
 not personal, use Piazza
 
 continuous integration
@@ -38,10 +39,12 @@ third third: refactoring, design patterns, in Java
 nice to be confident a consistent environment between you and your team mates when writing group code
 
 Docker / DockerHub very nice way of defining a consistent environment for a team
+"""
 
 def f (i: int) :
     ...
 
+"""
 intro to Docker
 intro to Travis CI
 
@@ -90,3 +93,4 @@ cycle length of 10 is 7
 
 5.0 /  2 -> 2.5
 5.0 // 2 -> 2.0
+"""
