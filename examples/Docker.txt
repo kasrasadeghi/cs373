@@ -49,7 +49,26 @@ python              3.5.2               58528474c16a        2 weeks ago         
 
 
 
+% pwd
+/Users/downing/cs373/github
+
+
+% ls
+CS373.bbprojectd  Dockerfile  README  examples	exercises  makefile  notes  patterns  projects
+
+
+
 % docker run -it -v /Users/downing/cs373/github:/usr/cs373 -w /usr/cs373 gpdowning/python
+root@a4fe84a658f0:/usr/cs373# pwd
+/usr/cs373
+
+
+
+root@a4fe84a658f0:/usr/cs373# ls
+CS373.bbprojectd  Dockerfile  README  examples	exercises  makefile  notes  patterns  projects
+
+
+
 root@a4fe84a658f0:/usr/cs373# which make
 /usr/bin/make
 
