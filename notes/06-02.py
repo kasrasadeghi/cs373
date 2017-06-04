@@ -94,3 +94,16 @@ cycle length of 10 is 7
 5.0 /  2 -> 2.5
 5.0 // 2 -> 2.0
 """
+
+# ---------
+# Questions
+# ---------
+
+"""
+What are the benefits of testing first?
+What are the benefits of continuous integration?
+What's the benefit of Docker?
+What are assertions good for and not good for?
+What's the Collatz Conjecture?
+In Python what's the difference between / and //?
+"""
