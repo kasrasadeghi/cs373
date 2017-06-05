@@ -38,6 +38,8 @@ clean:
 	cd examples; make clean
 	@echo
 	cd exercises; make clean
+	@echo
+	cd projects/collatz; make clean
 
 config:
 	git config -l
@@ -77,6 +79,7 @@ push:
 	git add examples
 	git add exercises
 	git add patterns
+	git add projects/collatz
 	git add makefile
 	git add notes
 	git commit -m "another commit"
@@ -114,6 +117,15 @@ sync:
     --include "IsPrime1T.py"                 \
     --exclude "*"                            \
     ../../exercises/python/ exercises
+	@rsync -r -t -u -v --delete              \
+    --include "Collatz.py"                   \
+    --include "RunCollatz.py"                \
+    --include "RunCollatz.in"                \
+    --include "RunCollatz.out"               \
+    --include "TestCollatz.py"               \
+    --include "TestCollatz.out"              \
+    --exclude "*"                            \
+    ../../projects/python/collatz/ projects/collatz
 
 test:
 	make clean
@@ -121,6 +133,8 @@ test:
 	cd examples; make test
 	@echo
 	cd exercises; make test
+	@echo
+	cd projects/collatz; make test
 
 versions:
 	which make
