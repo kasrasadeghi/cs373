@@ -98,6 +98,7 @@ sync:
     --include "Docker.txt"                   \
     --include "Hello.py"                     \
     --include "Assertions.py"                \
+    --include "Exceptions.py"                \
     --exclude "*"                            \
     ../../examples/python/ examples
 	@rsync -r -t -u -v --delete              \
