@@ -99,6 +99,11 @@ sync:
     --include "Hello.py"                     \
     --include "Assertions.py"                \
     --include "Exceptions.py"                \
+    --include "Types.py"                     \
+    --include "Variables.py"                 \
+    --include "Operators.py"                 \
+    --include "Copy.py"                      \
+    --include "Cache.py"                     \
     --exclude "*"                            \
     ../../examples/python/ examples
 	@rsync -r -t -u -v --delete              \
@@ -116,6 +121,10 @@ sync:
     --include "Coverage3T.py"                \
     --include "IsPrime1.py"                  \
     --include "IsPrime1T.py"                 \
+    --include "IsPrime2.py"                  \
+    --include "IsPrime2T.py"                 \
+    --include "Factorial.py"                 \
+    --include "FactorialT.py"                \
     --exclude "*"                            \
     ../../exercises/python/ exercises
 	@rsync -r -t -u -v --delete              \

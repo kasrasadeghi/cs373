@@ -2,7 +2,12 @@
 
 FILES :=              \
     Hello             \
-    Exceptions
+    Exceptions        \
+    Types             \
+    Operators         \
+    Variables         \
+    Copy              \
+    Cache
 
 ifeq ($(shell uname), Darwin)          # Apple
     PYTHON   := python3.5
