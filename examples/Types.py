@@ -121,13 +121,24 @@ class A :
         pass
 
 z = A(2, 3.45)
-assert isinstance(z, A)
-assert isinstance(A, type)
-assert issubclass(A, A)
-assert issubclass(A, object)
 
-assert isinstance(type, type)
-assert issubclass(type, type)
-assert issubclass(type, object)
+assert isinstance(z,      A)
+assert isinstance(z,      object)
+
+assert isinstance(A,      type)
+assert isinstance(A,      object)
+
+assert isinstance(type,   type)
+assert isinstance(type,   object)
+
+assert isinstance(object, object)
+
+assert issubclass(A,      A)
+assert issubclass(A,      object)
+
+assert issubclass(type,   type)
+assert issubclass(type,   object)
+
+assert issubclass(object, object)
 
 print("Done.")
