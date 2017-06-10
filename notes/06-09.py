@@ -113,3 +113,17 @@ the mutables
     set
     dict
 """
+
+# ---------
+# Questions
+# ---------
+
+"""
+What is a lazy cache? Eager cache? Meta cache?
+What is the except clause? Else clause? Finally clause?
+What is rethrowing?
+What is type? object?
+What type of elements can be in a list? Tuple? String?
+What type of elements can be in a set? Dict?
+What are the immutables? Mutables?
+"""
