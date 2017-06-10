@@ -52,7 +52,6 @@ endif
 .pylintrc:
 	$(PYLINT) --disable=locally-disabled --reports=no --generate-rcfile > $@
 
-.PHONY: collatz-tests
 collatz-tests:
 	git clone https://github.com/cs373t-summer-2017/collatz-tests.git
 
@@ -115,9 +114,10 @@ format:
 
 scrub:
 	make clean
-	rm -f .pylintrc
-	rm -f Collatz.html
-	rm -f Collatz.log
+	rm -f  .pylintrc
+	rm -f  Collatz.html
+	rm -f  Collatz.log
+	rm -rf collatz-tests
 
 status:
 	make clean
