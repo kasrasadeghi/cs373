@@ -40,14 +40,29 @@ else :                                   # no exception vs. raised and handled
 finally :                                # always
     pass                                 # even with break, continue, return
 
-assert isinstance(NameError, type)
-assert isinstance(type,      type)
+assert isinstance(NameError,     type)
+assert isinstance(NameError,     object)
 
+assert isinstance(type,          type)
+assert isinstance(type,          object)
+
+assert isinstance(object,        object)
+
+assert issubclass(NameError,     NameError)
 assert issubclass(NameError,     Exception)
-assert issubclass(Exception,     BaseException)
 assert issubclass(NameError,     BaseException)
+assert issubclass(NameError,     object)
+
+assert issubclass(Exception,     Exception)
+assert issubclass(Exception,     BaseException)
+assert issubclass(Exception,     object)
+
+assert issubclass(BaseException, BaseException)
 assert issubclass(BaseException, object)
 
-assert issubclass(type, object)
+assert issubclass(type,          type)
+assert issubclass(type,          object)
+
+assert issubclass(object,        object)
 
 print("Done.")
