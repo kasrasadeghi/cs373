@@ -104,6 +104,7 @@ sync:
     --include "Operators.py"                 \
     --include "Copy.py"                      \
     --include "Cache.py"                     \
+    --include "Iteration.py"                 \
     --exclude "*"                            \
     ../../examples/python/ examples
 	@rsync -r -t -u -v --delete              \
@@ -124,6 +125,7 @@ sync:
     --include "IsPrime2.py"                  \
     --include "IsPrime2T.py"                 \
     --include "FactorialT.py"                \
+    --include "ReduceT.py"                   \
     --exclude "*"                            \
     ../../exercises/python/ exercises
 	@rsync -r -t -u -v --delete              \
