@@ -6,9 +6,10 @@ FILES :=              \
     Types             \
     Operators         \
     Variables         \
-    Copy              \
-    Cache             \
-    Iteration
+    Iteration         \
+    Comprehenions     \
+    Yield             \
+    Iterables
 
 ifeq ($(shell uname), Darwin)          # Apple
     PYTHON   := python3.5

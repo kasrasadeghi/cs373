@@ -102,9 +102,10 @@ sync:
     --include "Types.py"                     \
     --include "Variables.py"                 \
     --include "Operators.py"                 \
-    --include "Copy.py"                      \
-    --include "Cache.py"                     \
     --include "Iteration.py"                 \
+    --include "Comprehensions.py"            \
+    --include "Yield.py"                     \
+    --include "Iterables.py"                 \
     --exclude "*"                            \
     ../../examples/python/ examples
 	@rsync -r -t -u -v --delete              \
@@ -124,9 +125,12 @@ sync:
     --include "IsPrime1T.py"                 \
     --include "IsPrime2.py"                  \
     --include "IsPrime2T.py"                 \
-    --include "Factorial.py"                \
+    --include "Factorial.py"                 \
     --include "FactorialT.py"                \
     --include "ReduceT.py"                   \
+    --include "MapT.py"                      \
+    --include "RangeIteratorT.py"            \
+    --include "RangeT.py"                    \
     --exclude "*"                            \
     ../../exercises/python/ exercises
 	@rsync -r -t -u -v --delete              \
