@@ -7,7 +7,7 @@ FILES :=              \
     Operators         \
     Variables         \
     Iteration         \
-    Comprehenions     \
+    Comprehensions    \
     Yield             \
     Iterables
 
