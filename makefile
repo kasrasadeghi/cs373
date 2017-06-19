@@ -127,7 +127,7 @@ sync:
     --include "IsPrime2T.py"                 \
     --include "Factorial.py"                 \
     --include "FactorialT.py"                \
-    --include "Reduce.py"                   \
+    --include "Reduce.py"                    \
     --include "ReduceT.py"                   \
     --include "MapT.py"                      \
     --include "RangeIteratorT.py"            \
