@@ -129,6 +129,7 @@ sync:
     --include "FactorialT.py"                \
     --include "Reduce.py"                    \
     --include "ReduceT.py"                   \
+    --include "Map.py"                       \
     --include "MapT.py"                      \
     --include "RangeIteratorT.py"            \
     --include "RangeT.py"                    \

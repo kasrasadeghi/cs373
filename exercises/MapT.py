@@ -16,6 +16,7 @@ from unittest import main, TestCase
 
 from Map import        \
     Map_Iterator,      \
+    Map_Generator,     \
     map_for_range,     \
     map_for_enumerate, \
     map_for,           \
@@ -25,6 +26,7 @@ class MyUnitTests (TestCase) :
     def setUp (self) :
         self.a = [
             Map_Iterator,
+            Map_Generator,
             map_for_range,
             map_for_enumerate,
             map_for,

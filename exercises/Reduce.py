@@ -25,6 +25,11 @@ def reduce_for_enumerate (bf: Callable[[T, T], T], a: Sequence[T], v: T) :
         v = bf(v, w)
     return v
 
+def reduce_for (bf: Callable[[T, T], T], a: Iterable[T], v: T) :
+    for w in a :
+        v = bf(v, w)
+    return v
+
 def reduce_while (bf: Callable[[T, T], T], a: Iterable[T], v: T) :
     p = iter(a)
     try :
@@ -33,9 +38,4 @@ def reduce_while (bf: Callable[[T, T], T], a: Iterable[T], v: T) :
             v = bf(v, w)
     except StopIteration :
         pass
-    return v
-
-def reduce_for (bf: Callable[[T, T], T], a: Iterable[T], v: T) :
-    for w in a :
-        v = bf(v, w)
     return v
