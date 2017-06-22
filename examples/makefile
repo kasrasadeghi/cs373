@@ -9,7 +9,12 @@ FILES :=              \
     Iteration         \
     Comprehensions    \
     Yield             \
-    Iterables
+    Iterables         \
+    FunctionKeywords  \
+    FunctionDefaults  \
+    FunctionUnpacking \
+    FunctionTuple     \
+    FunctionDict
 
 ifeq ($(shell uname), Darwin)          # Apple
     PYTHON   := python3.5
