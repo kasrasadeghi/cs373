@@ -45,3 +45,18 @@ def range_iterator (b, e) :
 three tokens: =, *, **
 two contexts: function call, function definition
 """
+
+# ---------
+# Questions
+# ---------
+
+"""
+Is range a container or a an iterator?
+What's the danger in using a mutable as a default value?
+Describe * in a function call.
+Describe * in a function definition (two cases).
+Describe ** in a function call.
+Describe ** in a function definition.
+Describe = in a function call.
+Describe = in a function definition.
+"""
