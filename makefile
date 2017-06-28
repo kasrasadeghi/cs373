@@ -141,6 +141,7 @@ sync:
     --include "RangeIteratorT.py"            \
     --include "Range.py"                     \
     --include "RangeT.py"                    \
+    --include "RMSE.py"                      \
     --include "RMSET.py"                     \
     --include "DecoratorsT.py"               \
     --exclude "*"                            \
