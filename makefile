@@ -111,7 +111,7 @@ sync:
     --include "FunctionUnpacking.py"         \
     --include "FunctionTuple.py"             \
     --include "FunctionDict.py"              \
-    --include "Lambdas.py"                   \
+    --include "Functions.py"                 \
     --exclude "*"                            \
     ../../examples/python/ examples
 	@rsync -r -t -u -v --delete              \
