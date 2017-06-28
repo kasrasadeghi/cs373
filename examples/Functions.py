@@ -3,6 +3,7 @@
 # pylint: disable = bad-whitespace
 # pylint: disable = invalid-name
 # pylint: disable = missing-docstring
+# pylint: disable = redefined-outer-name
 # pylint: disable = too-few-public-methods
 
 # ------------
@@ -39,6 +40,13 @@ a = [2, 3, 4]
 w = 2
 m = map(lambda v : v ** w, a)
 assert list(m) == [4, 9, 16]
+assert list(m) == []
+
+a = [2, 3, 4]
+w = 2
+m = map(lambda v : v ** w, a)
+w += 1
+assert list(m) == [8, 27, 64]
 assert list(m) == []
 
 a = [2, 3, 4]
