@@ -9,7 +9,9 @@ FILES :=            \
     IsPrime2T       \
     FactorialT      \
     ReduceT         \
-    MapT
+    MapT            \
+    RangeIteratorT  \
+    RangeT
 
 ifeq ($(shell uname), Darwin)          # Apple
     PYTHON   := python3.5
