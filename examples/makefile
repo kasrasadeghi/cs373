@@ -15,7 +15,7 @@ FILES :=              \
     FunctionUnpacking \
     FunctionTuple     \
     FunctionDict      \
-    Lambdas
+    Functions
 
 ifeq ($(shell uname), Darwin)          # Apple
     PYTHON   := python3.5
