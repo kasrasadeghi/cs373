@@ -148,6 +148,7 @@ sync:
     --include "RMSE.py"                      \
     --include "RMSET.py"                     \
     --include "DecoratorsT.py"               \
+    --include "Complex.py"                  \
     --include "ComplexT.py"                  \
     --exclude "*"                            \
     ../../exercises/python/ exercises
