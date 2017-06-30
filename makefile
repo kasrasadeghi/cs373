@@ -112,6 +112,10 @@ sync:
     --include "FunctionTuple.py"             \
     --include "FunctionDict.py"              \
     --include "Functions.py"                 \
+    --include "Copy.py"                      \
+    --include "Cache.py"                     \
+    --include "Classes.py"                   \
+    --include "MyPy.py"                      \
     --exclude "*"                            \
     ../../examples/python/ examples
 	@rsync -r -t -u -v --delete              \
@@ -144,6 +148,7 @@ sync:
     --include "RMSE.py"                      \
     --include "RMSET.py"                     \
     --include "DecoratorsT.py"               \
+    --include "ComplexT.py"                  \
     --exclude "*"                            \
     ../../exercises/python/ exercises
 	@rsync -r -t -u -v --delete              \
