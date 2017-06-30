@@ -57,3 +57,16 @@ def make_iterable (c) :
     return foo
 
 x += y        """is that the same as?"""      x = x + y
+
+# ---------
+# Questions
+# ---------
+
+"""
+Why are string, tuple, and frozenset not copyable?
+What is copy() vs. deepcopy()?
+What is slice()?
+What range of integer values does Python cache?
+When is x += y the same as x = x + y?
+In mypy what's the difference betweee Sequence, Iterator, and Iterable?
+"""
