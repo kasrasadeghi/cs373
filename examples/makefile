@@ -15,7 +15,11 @@ FILES :=              \
     FunctionUnpacking \
     FunctionTuple     \
     FunctionDict      \
-    Functions
+    Functions         \
+    Copy              \
+    Cache             \
+    MyPy              \
+    Classes
 
 ifeq ($(shell uname), Darwin)          # Apple
     PYTHON   := python3.5

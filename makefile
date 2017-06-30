@@ -114,8 +114,8 @@ sync:
     --include "Functions.py"                 \
     --include "Copy.py"                      \
     --include "Cache.py"                     \
-    --include "Classes.py"                   \
     --include "MyPy.py"                      \
+    --include "Classes.py"                   \
     --exclude "*"                            \
     ../../examples/python/ examples
 	@rsync -r -t -u -v --delete              \
@@ -147,8 +147,9 @@ sync:
     --include "RangeT.py"                    \
     --include "RMSE.py"                      \
     --include "RMSET.py"                     \
+    --include "Decorators.py"                \
     --include "DecoratorsT.py"               \
-    --include "Complex.py"                  \
+    --include "Complex.py"                   \
     --include "ComplexT.py"                  \
     --exclude "*"                            \
     ../../exercises/python/ exercises

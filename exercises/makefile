@@ -11,7 +11,10 @@ FILES :=            \
     ReduceT         \
     MapT            \
     RangeIteratorT  \
-    RangeT
+    RangeT          \
+    RMSET           \
+    DecoratorsT     \
+    ComplexT
 
 ifeq ($(shell uname), Darwin)          # Apple
     PYTHON   := python3.5

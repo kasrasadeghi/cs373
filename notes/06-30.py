@@ -1,46 +1,59 @@
 # -----------
-# Wed, 28 Jun
+# Fri, 30 Jun
 # -----------
 
-"""
-a little more about map and reduce
-zip
-decorators
-"""
+# singleton design pattern
 
-class square2 :
-    def __init__ (self) :
-        pass
+# Java
+class A {
+    public final static A only = A()
 
-f(x)
-square3(x)
+    private A () {}
 
-square2(x) # not ok
+    void f () {...}}
 
-x = square2(3) # not ok
-x = square2()
-print(x.__call__(3)) # 9
-print(x(3))          # 9
-print(square2(3))    # not ok
-print(square2()(3))  # 9
+class T {
+    public void static main (...) {
+        A x = new A(); # not ok
+        A x = A.only;
+        x.f();
+        A.only.f();
 
-"""
-Python Decorator
+# old A
+x = A() # invoke A's constructor
+        # make an instance of A
 
-@<something callable>
-definition of something callable
-"""
+# new A
+y = A() # invoking a lambda
+        # which returns an instance of A
 
-# ---------
-# Questions
-# ---------
+# finish Decoration
+# couple of misc things
+# class in Python
 
-"""
-Describe unary map(). Binary map(). N-ary map().
-Describe zip().
-Describe enumerate().
-What is __call__()?
-What is a closure?
-Do closure copy what they capture?
-What is a decorator?
-"""
+x = range_iterator(2, 4)
+p = iter(x)
+print(x is p) # true
+
+print(list(x)) # [2, 3]
+print(list(x)) # []
+
+x = range_iterable(2, 4)
+p = iter(x)
+print(x is p) # false
+
+print(list(x)) # [2, 3]
+print(list(x)) # [2, 3]
+
+def make_iterable (c) :
+    class foo :
+        def __init__ (self, *b, **e) :
+            self.b = b
+            self.e = e
+
+        def __iter__ (self) :
+            return c(*self.b, **self.e)
+
+    return foo
+
+x += y        """is that the same as?"""      x = x + y
