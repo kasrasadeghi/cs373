@@ -14,12 +14,16 @@ print("Copy.py")
 
 a = [2, 3, 4]
 
-assert a[1]   == 3
-assert a[-1]  == 4
-assert a[1:2] == [3]
-assert a[1:3] == [3, 4]
-assert a[0:3] == [2, 3, 4]
-assert a[:]   == [2, 3, 4]
+assert a[1]     == 3
+assert a[-1]    == 4
+assert a[1:2]   == [3]
+assert a[1:3]   == [3, 4]
+assert a[0:3]   == [2, 3, 4]
+assert a[0:3:2] == [2, 4]
+assert a[:]     == [2, 3, 4]
+
+assert a.__getitem__(1)              == 3
+assert a.__getitem__(slice(0, 3, 2)) == [2, 4]
 
 b = [1, a, 5]
 
@@ -41,10 +45,16 @@ assert b[1] ==     c[1]
 
 u = (2, 3, 4)
 
-assert u[1:2] == (3,)
-assert u[1:3] == (3, 4)
-assert u[0:3] == (2, 3, 4)
-assert u[:]   == (2, 3, 4)
+assert u[1]     == 3
+assert u[-1]    == 4
+assert u[1:2]   == (3,)
+assert u[1:3]   == (3, 4)
+assert u[0:3]   == (2, 3, 4)
+assert u[0:3:2] == (2, 4)
+assert u[:]     == (2, 3, 4)
+
+assert u.__getitem__(1)              == 3
+assert u.__getitem__(slice(0, 3, 2)) == (2, 4)
 
 v = (1, u, 5)
 
