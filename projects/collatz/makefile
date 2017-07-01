@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := test
+.DEFAULT_GOAL := all
 
 FILES :=            \
     Collatz.html    \
@@ -61,8 +61,7 @@ Collatz.html: Collatz.py
 Collatz.log:
 	git log > Collatz.log
 
-.PHONY: RunCollatz.tmp
-RunCollatz.tmp: .pylintrc
+RunCollatz.tmp: Collatz.py RunCollatz.py .pylintrc
 	-$(MYPY) Collatz.py
 	-$(PYLINT) Collatz.py
 	-$(MYPY) RunCollatz.py
@@ -70,13 +69,14 @@ RunCollatz.tmp: .pylintrc
 	$(PYTHON) RunCollatz.py < RunCollatz.in > RunCollatz.tmp
 	-diff RunCollatz.tmp RunCollatz.out
 
-.PHONY: TestCollatz.tmp
-TestCollatz.tmp: .pylintrc
+TestCollatz.tmp: Collatz.py TestCollatz.py .pylintrc
 	-$(MYPY) TestCollatz.py
 	-$(PYLINT) TestCollatz.py
 	-$(COVERAGE) run    --branch TestCollatz.py >  TestCollatz.tmp 2>&1
 	-$(COVERAGE) report -m                      >> TestCollatz.tmp
 	cat TestCollatz.tmp
+
+all:
 
 check:
 	@not_found=0;                                 \
@@ -112,6 +112,8 @@ format:
 	$(AUTOPEP8) -i RunCollatz.py
 	$(AUTOPEP8) -i TestCollatz.py
 
+run: RunCollatz.tmp
+
 scrub:
 	make clean
 	rm -f  .pylintrc
@@ -126,7 +128,16 @@ status:
 	git remote -v
 	git status
 
-test: Collatz.html Collatz.log RunCollatz.tmp TestCollatz.tmp collatz-tests
+test: TestCollatz.tmp
+
+travis: collatz-tests Collatz.html Collatz.log
+	make clean
+	ls -al
+	make
+	ls -al
+	make run
+	ls -al
+	make test
 	ls -al
 	make check
 

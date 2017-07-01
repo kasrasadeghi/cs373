@@ -20,7 +20,7 @@ from Complex import \
 class MyUnitTests (TestCase) :
     def setUp (self) :
         self.a = [
-               complex
+            complex,
             my_complex]
 
     def test_01 (self) :

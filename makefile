@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := test
+.DEFAULT_GOAL := all
 
 ifeq ($(shell uname), Darwin)          # Apple
     PYTHON   := python3.5
@@ -34,6 +34,8 @@ else                                   # UTCS
     AUTOPEP8 := autopep8
 endif
 
+all:
+
 clean:
 	cd examples; make clean
 	@echo
@@ -44,16 +46,7 @@ clean:
 config:
 	git config -l
 
-docker-build:
-	docker build -t gpdowning/python .
-
-docker-pull:
-	docker pull gpdowning/python
-
-docker-push:
-	docker push gpdowning/python
-
-docker-run:
+docker:
 	docker run -it -v $(PWD):/usr/cs373 -w /usr/cs373 gpdowning/python
 
 init:
@@ -78,10 +71,10 @@ push:
 	git add Dockerfile
 	git add examples
 	git add exercises
-	git add patterns
-	git add projects/collatz
 	git add makefile
 	git add notes
+	git add patterns
+	git add projects/collatz
 	git commit -m "another commit"
 	git push
 	git status
@@ -164,13 +157,18 @@ sync:
     ../../projects/python/collatz/ projects/collatz
 
 test:
-	make clean
-	@echo
 	cd examples; make test
 	@echo
 	cd exercises; make test
 	@echo
 	cd projects/collatz; make test
+
+travis:
+	cd examples; make travis
+	@echo
+	cd exercises; make travis
+	@echo
+	cd projects/collatz; make travis
 
 versions:
 	which cmake

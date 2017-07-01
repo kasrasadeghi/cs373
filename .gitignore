@@ -1,3 +1,6 @@
 .DS_Store
 CS373.bbprojectd
+examples/build
+exercises/build
 Icon?
+projects/collatz/build

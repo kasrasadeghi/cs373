@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := test
+.DEFAULT_GOAL := all
 
 FILES :=            \
     UnitTests3T     \
@@ -56,15 +56,19 @@ endif
 RMSET.pyx: RMSE.py RMSET.py .pylintrc
 	-$(MYPY) $<
 	-$(PYLINT) $<
+	-$(MYPY) $(@:.pyx=.py)
 	-$(PYLINT) $(@:.pyx=.py)
 	$(PYTHON) $(@:.pyx=.py)
 
 %T.pyx: %.py %T.py .pylintrc
 	-$(MYPY) $<
 	-$(PYLINT) $<
+	-$(MYPY) $(@:.pyx=.py)
 	-$(PYLINT) $(@:.pyx=.py)
 	$(COVERAGE) run --branch $(@:.pyx=.py)
 	$(COVERAGE) report -m
+
+all:
 
 clean:
 	rm -f  .coverage
@@ -73,3 +77,8 @@ clean:
 	rm -rf __pycache__
 
 test: $(FILES:=.pyx)
+
+travis:
+	make clean
+	ls -al
+	make test

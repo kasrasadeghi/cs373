@@ -1,4 +1,4 @@
-.DEFAULT_GOAL := test
+.DEFAULT_GOAL := all
 
 FILES :=              \
     Hello             \
@@ -63,9 +63,16 @@ endif
 	-$(PYLINT) $<
 	$(PYTHON) $<
 
+all:
+
 clean:
 	rm -f  .pylintrc
 	rm -f  *.pyc
 	rm -rf __pycache__
 
 test: $(FILES:=.pyx)
+
+travis:
+	make clean
+	ls -al
+	make test
