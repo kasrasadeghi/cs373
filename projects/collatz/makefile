@@ -112,8 +112,6 @@ format:
 	$(AUTOPEP8) -i RunCollatz.py
 	$(AUTOPEP8) -i TestCollatz.py
 
-run: RunCollatz.tmp
-
 scrub:
 	make clean
 	rm -f  .pylintrc
@@ -128,14 +126,12 @@ status:
 	git remote -v
 	git status
 
-test: TestCollatz.tmp
+test: RunCollatz.tmp TestCollatz.tmp
 
 travis: collatz-tests Collatz.html Collatz.log
 	make clean
 	ls -al
 	make
-	ls -al
-	make run
 	ls -al
 	make test
 	ls -al
