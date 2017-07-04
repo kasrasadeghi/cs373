@@ -28,7 +28,9 @@ set (FILES
     Range
     RMSE
     Decorators
-    Complex)
+    Complex
+    Select
+    Project)
 
 enable_testing ()
 

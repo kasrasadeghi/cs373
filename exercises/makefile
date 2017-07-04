@@ -14,7 +14,9 @@ FILES :=            \
     RangeT          \
     RMSET           \
     DecoratorsT     \
-    ComplexT
+    ComplexT        \
+    SelectT         \
+    ProjectT
 
 ifeq ($(shell uname), Darwin)          # Apple
     PYTHON   := python3.5
