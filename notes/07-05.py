@@ -102,4 +102,6 @@ What is natural_join()?
 Under what circumstances does natural_join produce nothing?
 Under what circumstances does natural_join become cross_join?
 What is all()?
+What is a regular expression?
+What does *, +, ?, ^, $, [] do?
 """
