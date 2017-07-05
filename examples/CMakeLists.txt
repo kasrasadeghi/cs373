@@ -36,9 +36,9 @@ enable_testing ()
 
 add_custom_command (OUTPUT .pylintrc COMMAND ${PYLINT} --disable=locally-disabled --reports=no --generate-rcfile > .pylintrc)
 add_custom_target  (.pylintrcx DEPENDS .pylintrc)
+add_test           (.pylintrc  ${MAKE} .pylintrcx)
 
 foreach (file ${FILES})
-    add_test (.pylintrc      ${MAKE}    .pylintrcx)
     add_test (${file}.mypy   ${MYPY}   ../${file}.py)
     add_test (${file}.pylint ${PYLINT} ../${file}.py)
     add_test (${file}                  ../${file}.py)
