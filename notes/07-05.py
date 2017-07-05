@@ -66,35 +66,40 @@ def theta_join (r, s, bp) :
 def theta_join (r, s, bp) :
     return (dict(a, **b) for a in r for b in s if bp(a, b))
 
+print(all([True, 2, 2.5, "a", [2], (2), {2}, {"a": 2}])) # True
+print(none([False, 0, 0.0, "", [], (), {}, dict()]))     # False
 
+def theta_join (r, s) :
+    def bp (u, v) :
+        for k in u :
+            if k in v :
+                if u[k] != v[k]
+                    return False
+        return True
 
+    def bp (u, v) :
+        return all(u[k] == v[k] for k in u if k in v)
 
+    for a in r :
+        for b in s :
+            if bp(a, b)
+                yield dict(a, **b)
 
+"""
+regular expression incredibly valuable
+"""
 
+# ---------
+# Questions
+# ---------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+"""
+What is cross_join()?
+What is theta_join()?
+Under what circumstances does theta_join produce nothing?
+Under what circumstances does theta_join become cross_join?
+What is natural_join()?
+Under what circumstances does natural_join produce nothing?
+Under what circumstances does natural_join become cross_join?
+What is all()?
+"""
