@@ -109,6 +109,7 @@ sync:
     --include "Cache.py"                     \
     --include "MyPy.py"                      \
     --include "Classes.py"                   \
+    --include "RegExps.py"                   \
     --exclude "*"                            \
     ../../examples/python/ examples
 	@rsync -r -t -u -v --delete              \

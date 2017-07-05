@@ -17,25 +17,25 @@ message(${PYLINT})
 enable_testing ()
 
 add_custom_command (OUTPUT .pylintrc COMMAND ${PYLINT} --disable=locally-disabled --reports=no --generate-rcfile > .pylintrc)
-add_custom_target  (.pylintrcx ALL DEPENDS .pylintrc)
+add_custom_target  (.pylintrcx DEPENDS .pylintrc)
+add_test           (.pylintrc  ${MAKE} .pylintrcx)
+
+add_test (Collatz.mypy   ${MYPY}   ../Collatz.py)
+add_test (Collatz.pylint ${PYLINT} ../Collatz.py)
 
 add_custom_command (OUTPUT RunCollatz.tmp COMMAND ../RunCollatz.py < ../RunCollatz.in > RunCollatz.tmp)
-add_custom_target (RunCollatz.tmpx ALL DEPENDS RunCollatz.tmp)
+add_custom_target  (RunCollatz.pyx diff RunCollatz.tmp ../RunCollatz.out DEPENDS RunCollatz.tmp)
 
-add_test (Collatz.mypy       ${MYPY}                  ../Collatz.py)
-add_test (Collatz.pylint     ${PYLINT}                ../Collatz.py)
+add_test (RunCollatz.mypy   ${MYPY}   ../RunCollatz.py)
+add_test (RunCollatz.pylint ${PYLINT} ../RunCollatz.py)
+add_test (RunCollatz        ${MAKE}      RunCollatz.pyx)
 
-add_test (RunCollatz.mypy    ${MYPY}                  ../RunCollatz.py)
-add_test (RunCollatz.pylint  ${PYLINT}                ../RunCollatz.py)
-add_test (RunCollatz         diff RunCollatz.tmp      ../RunCollatz.out)
+add_custom_command (OUTPUT TestCollatz.tmp COMMAND  ${COVERAGE} run --branch ../TestCollatz.py COMMAND ${COVERAGE} report -m > TestCollatz.tmp)
+add_custom_target  (TestCollatz.pyx DEPENDS TestCollatz.tmp)
 
-add_custom_command (OUTPUT TestCollatz.cov COMMAND ${COVERAGE} report -m > TestCollatz.cov)
-add_custom_target  (TestCollatz.covx DEPENDS TestCollatz.cov)
-
-add_test (TestCollatz.mypy   ${MYPY}                  ../TestCollatz.py)
-add_test (TestCollatz.pylint ${PYLINT}                ../TestCollatz.py)
-add_test (TestCollatz        ${COVERAGE} run --branch ../TestCollatz.py)
-add_test (${file}.cov        ${MAKE}                     TestCollatz.covx)
+add_test (TestCollatz.mypy   ${MYPY}   ../TestCollatz.py)
+add_test (TestCollatz.pylint ${PYLINT} ../TestCollatz.py)
+add_test (TestCollatz        ${MAKE}      TestCollatz.pyx)
 
 set_property (DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ".coverage" ".mypy_cache")
 
