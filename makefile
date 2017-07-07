@@ -113,6 +113,25 @@ sync:
     --exclude "*"                            \
     ../../examples/python/ examples
 	@rsync -r -t -u -v --delete              \
+    --include "Bookstore1.xml"               \
+    --include "Bookstore1.dtd.xml"           \
+    --include "Bookstore2.dtd.xml"           \
+    --include "Bookstore3.xml"               \
+    --include "Bookstore3.xsd.xml"           \
+    --include "Bookstore.json"               \
+    --include "Bookstore.schema.json"        \
+    --exclude "*"                            \
+    ../../examples/xml/ examples
+	@rsync -r -t -u -v --delete              \
+    --include "ShowDatabases.sql"            \
+    --include "ShowEngines.sql"              \
+    --include "Create.sql"                   \
+    --include "Select.sql"                   \
+    --include "Join.sql"                     \
+    --include "Joins.sql"                    \
+    --exclude "*"                            \
+    ../../examples/sql/ examples
+	@rsync -r -t -u -v --delete              \
     --include "UnitTests1.py"                \
     --include "UnitTests1T.py"               \
     --include "UnitTests2.py"                \
