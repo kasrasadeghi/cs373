@@ -118,10 +118,14 @@ sync:
     --include "Bookstore2.dtd.xml"           \
     --include "Bookstore3.xml"               \
     --include "Bookstore3.xsd.xml"           \
+    --exclude "*"                            \
+    ../../examples/xml/ examples
+	@rsync -r -t -u -v --delete              \
+    --include "Bookstore1.xml"               \
     --include "Bookstore.json"               \
     --include "Bookstore.schema.json"        \
     --exclude "*"                            \
-    ../../examples/xml/ examples
+    ../../examples/json/ examples
 	@rsync -r -t -u -v --delete              \
     --include "ShowDatabases.sql"            \
     --include "ShowEngines.sql"              \
