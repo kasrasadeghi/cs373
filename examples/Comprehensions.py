@@ -120,8 +120,8 @@ assert y       == [4, 5]
 assert list(g) == [2+4, 2+5, 3+4, 3+5, 4+4, 4+5]
 assert list(g) == []
 
-s      = {2, 3, 4}
-t: set = set()
+s = {2, 3, 4}
+t = set()
 for v in s :
     t |= {v * 5}
 assert s == { 2,  3,  4}
