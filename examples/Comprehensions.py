@@ -140,11 +140,15 @@ assert d == {2: "abc",    3: "def",    4: "ghi"}
 assert e == {3: "abcxyz", 4: "defxyz", 5: "ghixyz"}
 
 d = {2: "abc", 3: "def", 4: "ghi"}
-e = {k + 1: d[k] + "xyz" for k in d}                   # dict comprehension
+e = {k + 1: d[k] + "xyz" for k in d}                # dict comprehension
 assert isinstance(e, dict)
 assert not hasattr(e, "__next__")
 assert     hasattr(e, "__iter__")
 assert d == {2: "abc",    3: "def",    4: "ghi"}
 assert e == {3: "abcxyz", 4: "defxyz", 5: "ghixyz"}
+
+a = "Nothing to be done."
+b = [c.lower() for c in a]
+assert "".join(b) == "nothing to be done."
 
 print("Done.")
