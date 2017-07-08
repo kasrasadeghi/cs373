@@ -9,7 +9,8 @@
 # Indexables.py
 # -------------
 
-from typing import List
+from itertools import count
+from typing    import List
 
 print("Iteration.py")
 
@@ -67,14 +68,14 @@ for k in d :                          # order not guaranteed
 assert s == 9
 
 d = {2: "abc", 3: "def"}
-k = d.keys()
-l = d.keys()
-assert k is not l
-assert str(type(k)) == "<class 'dict_keys'>"
-assert set(k) == {2, 3}
+k1 = d.keys()
+k2 = d.keys()
+assert k1 is not k2
+assert str(type(k1)) == "<class 'dict_keys'>"
+assert set(k1) == {2, 3}
 d[4] = "ghi"
-assert set(k) == {2, 3, 4}
-assert set(k) == {2, 3, 4}
+assert set(k1) == {2, 3, 4}
+assert set(k1) == {2, 3, 4}
 
 d = {2: "abc", 3: "def", 4: "ghi"}
 v = d.values()
@@ -129,5 +130,32 @@ for v in r :
 else :           # else clause in a for loop
     assert False # executes when the loop terminates normally
 assert s == 45
+
+c = count()                          # 0, 1, 2, ...
+assert     hasattr(c, "__next__")
+assert not hasattr(c, "__getitem__")
+#assert c[0] == 0                    # TypeError: 'itertools.count' object is not indexable
+for v in c :
+    assert v >= 0
+    if v == 10 :
+        break
+for v in c :
+    assert v > 10
+    if v == 20 :
+        break
+
+c = count(3, 2) # 3, 5, 7, 9, ...
+for v in c :
+    assert v >= 3
+    if v > 10 :
+        break
+
+z = zip([2, 3], [4, 5, 6])
+assert list(z) == [(2, 4), (3, 5)]
+assert list(z) == []
+
+z = zip([2, 3], count())
+assert list(z) == [(2, 0), (3, 1)]
+assert list(z) == []
 
 print("Done.")

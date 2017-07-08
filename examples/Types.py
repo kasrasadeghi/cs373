@@ -5,7 +5,6 @@
 # pylint: disable = invalid-name
 # pylint: disable = missing-docstring
 # pylint: disable = redefined-outer-name
-# pylint: disable = redefined-variable-type
 # pylint: disable = too-few-public-methods
 # pylint: disable = unused-import
 
@@ -14,8 +13,7 @@
 # --------
 
 from typing import Dict, FrozenSet, List, Set, Tuple
-
-from types import FunctionType
+from types  import FunctionType
 
 print("Types.py")
 

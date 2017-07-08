@@ -19,7 +19,7 @@ FILES :=            \
     ProjectT
 
 ifeq ($(shell uname), Darwin)          # Apple
-    PYTHON   := python
+    PYTHON   := python3
     PIP      := pip
     MYPY     := mypy
     PYLINT   := pylint
