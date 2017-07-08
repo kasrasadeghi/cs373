@@ -121,7 +121,6 @@ sync:
     --exclude "*"                            \
     ../../examples/xml/ examples
 	@rsync -r -t -u -v --delete              \
-    --include "Bookstore1.xml"               \
     --include "Bookstore.json"               \
     --include "Bookstore.schema.json"        \
     --exclude "*"                            \
