@@ -14,8 +14,8 @@ from types import GeneratorType
 
 print("Comprehensions.py")
 
-x       = [2, 3, 4]
-y: list = []
+x = [2, 3, 4]
+y = []
 for v in x :
     y += [v * 5]
 assert x == [ 2,  3,  4]
@@ -93,9 +93,9 @@ assert list(m) == [    15,     25]
 assert list(f) == []
 assert list(m) == []
 
-x       = [2, 3, 4]
-y       = [4, 5]
-z: list = []
+x = [2, 3, 4]
+y = [4, 5]
+z = []
 for v in x :
     for w in y :
         z += [v + w]
