@@ -6,15 +6,7 @@ FILES :=                    \
     StrategyPattern3        \
     StrategyPattern4        \
     StrategyPattern5        \
-    StrategyPattern6        \
-    SingletonPatternT       \
-    StrategyPattern7        \
-    StrategyPattern8        \
-    StrategyPattern9        \
-    CreationalPatternT      \
-    FactoryMethodPatternT   \
-    AbstractFactoryPatternT \
-    AdapterPatternT
+    StrategyPattern6
 
 %T.class: %.java %T.java
 	javac -Xlint $<
