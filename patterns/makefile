@@ -1,22 +1,46 @@
-.DEFAULT_GOAL := test
+.DEFAULT_GOAL := all
 
-FILES :=
+FILES :=                    \
+    StrategyPattern1        \
+    StrategyPattern2        \
+    StrategyPattern3        \
+    StrategyPattern4        \
+    StrategyPattern5        \
+    StrategyPattern6        \
+    SingletonPatternT       \
+    StrategyPattern7        \
+    StrategyPattern8        \
+    StrategyPattern9        \
+    CreationalPatternT      \
+    FactoryMethodPatternT   \
+    AbstractFactoryPatternT \
+    AdapterPatternT
 
-FactoryMethodPatternT.class: FactoryMethodPattern.java FactoryMethodPatternT.java
-	javac -Xlint FactoryMethodPattern.java
-	javac -Xlint FactoryMethodPatternT.java
-
-SingletonPatternT.class: SingletonPattern.java SingletonPatternT.java
-	javac -Xlint SingletonPattern.java
-	javac -Xlint SingletonPatternT.java
+%T.class: %.java %T.java
+	javac -Xlint $<
+	javac -Xlint $(patsubst %.java,%T.java,$<)
 
 %.class: %.java
 	javac -Xlint $<
 
+%T.javax: %.class %T.class
+	java -ea $(patsubst %.class,%T,$<)
+
 %.javax: %.class
 	java -ea $(patsubst %.class,%,$<)
 
+all: $(FILES:=.class)
+
 clean:
 	rm -f *.class
+
+sync:
+	make clean
+	@echo `pwd`
+	@rsync -r -t -u -v --delete \
+	--include "makefile"        \
+	--include "*.java"          \
+	--exclude "*"               \
+	. downing@$(CS):cs/patterns/java/
 
 test: $(FILES:=.javax)
