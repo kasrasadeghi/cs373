@@ -38,20 +38,3 @@ add_test (TestCollatz.pylint ${PYLINT} ../TestCollatz.py)
 add_test (TestCollatz        ${MAKE}      TestCollatz.pyx)
 
 set_property (DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ".coverage" ".mypy_cache")
-
-add_custom_target (versions)
-
-set (PRGS
-    cmake
-    make
-    mypy
-    pylint)
-
-foreach (prg ${PRGS})
-    add_custom_command (TARGET versions
-        COMMAND echo which ${prg}
-        COMMAND      which ${prg}
-        COMMAND echo ${prg} --version
-        COMMAND      ${prg} --version
-        COMMAND echo)
-endforeach ()

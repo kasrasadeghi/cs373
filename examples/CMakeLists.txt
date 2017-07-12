@@ -30,7 +30,9 @@ set (FILES
     Copy
     Cache
     MyPy
-    Classes)
+    Classes
+    RegExps
+    Test)
 
 enable_testing ()
 
@@ -45,20 +47,3 @@ foreach (file ${FILES})
 endforeach ()
 
 set_property (DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ".coverage" ".mypy_cache")
-
-add_custom_target (versions)
-
-set (PRGS
-    cmake
-    make
-    mypy
-    pylint)
-
-foreach (prg ${PRGS})
-    add_custom_command (TARGET versions
-        COMMAND echo which ${prg}
-        COMMAND      which ${prg}
-        COMMAND echo ${prg} --version
-        COMMAND      ${prg} --version
-        COMMAND echo)
-endforeach ()
