@@ -50,36 +50,52 @@ class T {
         y.h(2);        // A.h
 
 class A {
-    public void f (int)  {...}
+    private void f () {...}
+    public void g () {f();}
 
 class B extends A {
-    public void f (int)  {...}
+    private void f ()  {...}
 
 class T {
     public static void main (...) {
-        A y;
-        if (...)
-            y = new A();
-        else
-            y = new B();
-        y.f(2);
+        A y = new B();
+        y.g();         // A.f
 
+"""
+Java can inline methods:
+    1. final method
+    2. final class
+    3. static method
+    4. private method
+"""
 
+class A {
+    private static A _only;
 
+    private A () {}
 
+    public static A only () {
+        if (_only == null)
+            _only = new A();
+        return _only;}}
 
+class A {
+    private static A _only = new A();
 
+    private A () {}
 
+    public static A only () {
+        return _only;}}
 
+# ---------
+# Questions
+# ---------
 
-
-
-
-
-
-
-
-
-
-
-
+"""
+What is an abstract class? Abstract method?
+What is a final class? Final method?
+What is an inline method?
+When are methods not dynamically bound and therefore eligible to be inlined?
+What's better about an abstract method compared to a non-abstract method?
+What's an eager singleton? A lazy singleton?
+"""
