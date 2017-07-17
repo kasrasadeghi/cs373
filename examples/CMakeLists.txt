@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.8.2)
+cmake_minimum_required (VERSION 3.5.1)
 
 project (Examples NONE)
 
@@ -10,6 +10,9 @@ message(${MYPY})
 
 find_program (PYLINT pylint)
 message(${PYLINT})
+
+find_program (PYTHON python3)
+message(${PYTHON})
 
 set (FILES
     Hello
@@ -34,16 +37,32 @@ set (FILES
     RegExps
     Test)
 
-enable_testing ()
-
 add_custom_command (OUTPUT .pylintrc COMMAND ${PYLINT} --disable=locally-disabled --reports=no --generate-rcfile > .pylintrc)
-add_custom_target  (.pylintrcx DEPENDS .pylintrc)
-add_test           (.pylintrc  ${MAKE} .pylintrcx)
+
+add_custom_target (run)
+
+add_custom_target (CommandLine.pyx
+    COMMAND echo -${MYPY}   ../CommandLine.py
+    COMMAND      -${MYPY}   ../CommandLine.py
+    COMMAND echo -${PYLINT} ../CommandLine.py
+    COMMAND      -${PYLINT} ../CommandLine.py
+    COMMAND echo ${PYTHON}  ../CommandLine.py nothing to be done
+    COMMAND      ${PYTHON}  ../CommandLine.py nothing to be done
+    DEPENDS .pylintrc)
+add_custom_command (TARGET run
+    COMMAND ${MAKE} CommandLine.pyx)
 
 foreach (file ${FILES})
-    add_test (${file}.mypy   ${MYPY}   ../${file}.py)
-    add_test (${file}.pylint ${PYLINT} ../${file}.py)
-    add_test (${file}                  ../${file}.py)
+    add_custom_target (${file}.pyx
+        COMMAND echo -${MYPY}   ../${file}.py
+        COMMAND      -${MYPY}   ../${file}.py
+        COMMAND echo -${PYLINT} ../${file}.py
+        COMMAND      -${PYLINT} ../${file}.py
+        COMMAND echo ${PYTHON}  ../${file}.py
+        COMMAND      ${PYTHON}  ../${file}.py
+        DEPENDS .pylintrc)
+    add_custom_command (TARGET run
+        COMMAND ${MAKE} ${file}.pyx)
 endforeach ()
 
-set_property (DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ".coverage" ".mypy_cache")
+set_property (DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ".mypy_cache")
