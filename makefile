@@ -209,7 +209,6 @@ sync:
     --exclude "*"                           \
     ../../patterns/python/ patterns
 	@rsync -r -t -u -v --delete             \
-    --include "CMakeLists.txt"              \
     --include "Collatz.py"                  \
     --include "RunCollatz.py"               \
     --include "RunCollatz.in"               \

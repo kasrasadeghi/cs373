@@ -1,6 +1,7 @@
 .DEFAULT_GOAL := all
 
 FILES :=            \
+    collatz-tests   \
     Collatz.html    \
     Collatz.log     \
     Collatz.py      \
@@ -61,48 +62,31 @@ Collatz.html: Collatz.py
 Collatz.log:
 	git log > Collatz.log
 
-RunCollatz.tmp: Collatz.py RunCollatz.py .pylintrc
-	-$(MYPY) Collatz.py
+RunCollatz.pyx: Collatz.py RunCollatz.py .pylintrc
+	-$(MYPY)   Collatz.py
 	-$(PYLINT) Collatz.py
-	-$(MYPY) RunCollatz.py
+	-$(MYPY)   RunCollatz.py
 	-$(PYLINT) RunCollatz.py
-	$(PYTHON) RunCollatz.py < RunCollatz.in > RunCollatz.tmp
+	$(PYTHON)  RunCollatz.py < RunCollatz.in > RunCollatz.tmp
 	-diff RunCollatz.tmp RunCollatz.out
 
-TestCollatz.tmp: Collatz.py TestCollatz.py .pylintrc
-	-$(MYPY) TestCollatz.py
-	-$(PYLINT) TestCollatz.py
-	-$(COVERAGE) run    --branch TestCollatz.py >  TestCollatz.tmp 2>&1
-	-$(COVERAGE) report -m                      >> TestCollatz.tmp
-	cat TestCollatz.tmp
+TestCollatz.pyx: Collatz.py TestCollatz.py .pylintrc
+	-$(MYPY)     TestCollatz.py
+	-$(PYLINT)   TestCollatz.py
+	-$(COVERAGE) run    --branch TestCollatz.py
+	-$(COVERAGE) report -m
 
 all:
 
-check:
-	@not_found=0;                                 \
-    for i in $(FILES);                            \
-    do                                            \
-        if [ -e $$i ];                            \
-        then                                      \
-            echo "$$i found";                     \
-        else                                      \
-            echo "$$i NOT FOUND";                 \
-            not_found=`expr "$$not_found" + "1"`; \
-        fi                                        \
-    done;                                         \
-    if [ $$not_found -ne 0 ];                     \
-    then                                          \
-        echo "$$not_found failures";              \
-        exit 1;                                   \
-    fi;                                           \
-    echo "success";
+check: $(FILES)
 
 clean:
 	rm -f  .coverage
+	rm -f  .pylintrc
 	rm -f  *.pyc
-	rm -f  RunCollatz.tmp
-	rm -f  TestCollatz.tmp
+	rm -f  *.tmp
 	rm -rf __pycache__
+	rm -rf .mypy_cache
 
 config:
 	git config -l
@@ -112,9 +96,10 @@ format:
 	$(AUTOPEP8) -i RunCollatz.py
 	$(AUTOPEP8) -i TestCollatz.py
 
+run: RunCollatz.pyx TestCollatz.pyx
+
 scrub:
 	make clean
-	rm -f  .pylintrc
 	rm -f  Collatz.html
 	rm -f  Collatz.log
 	rm -rf collatz-tests
@@ -126,16 +111,12 @@ status:
 	git remote -v
 	git status
 
-test: RunCollatz.tmp TestCollatz.tmp
-
 travis: collatz-tests Collatz.html Collatz.log
 	make clean
 	ls -al
-	make
+	make run
 	ls -al
-	make test
-	ls -al
-	make check
+	make -r check
 
 versions:
 	which cmake
@@ -162,10 +143,7 @@ versions:
 	which $(COVERAGE)
 	$(COVERAGE) --version
 	@echo
-	-which $(PYDOC)
-	-$(PYDOC) --version
+	which $(PYDOC)
 	@echo
 	which $(AUTOPEP8)
 	$(AUTOPEP8) --version
-	@echo
-	$(PIP) list
