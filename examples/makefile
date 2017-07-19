@@ -19,7 +19,9 @@ FILES :=              \
     Copy              \
     Cache             \
     MyPy              \
-    Classes
+    Classes           \
+    RegExps           \
+    Reflection
 
 ifeq ($(shell uname), Darwin)          # Apple
     PYTHON   := python3
@@ -70,9 +72,9 @@ clean:
 	rm -f  *.pyc
 	rm -rf __pycache__
 
-test: $(FILES:=.pyx)
+run: $(FILES:=.pyx)
 
 travis:
 	make clean
 	ls -al
-	make test
+	make run

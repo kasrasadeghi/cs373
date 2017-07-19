@@ -1,12 +1,15 @@
 .DEFAULT_GOAL := all
 
-FILES :=                    \
-    StrategyPattern1        \
-    StrategyPattern2        \
-    StrategyPattern3        \
-    StrategyPattern4        \
-    StrategyPattern5        \
-    StrategyPattern6
+FILES :=             \
+    StrategyPattern1 \
+    StrategyPattern2 \
+    StrategyPattern3 \
+    StrategyPattern4 \
+    StrategyPattern5 \
+    StrategyPattern6 \
+    StrategyPattern7 \
+    StrategyPattern8 \
+    StrategyPattern9
 
 %T.class: %.java %T.java
 	javac -Xlint $<
@@ -26,6 +29,8 @@ all: $(FILES:=.class)
 clean:
 	rm -f *.class
 
+run: $(FILES:=.javax)
+
 sync:
 	make clean
 	@echo `pwd`
@@ -34,5 +39,3 @@ sync:
 	--include "*.java"          \
 	--exclude "*"               \
 	. downing@$(CS):cs/patterns/java/
-
-test: $(FILES:=.javax)

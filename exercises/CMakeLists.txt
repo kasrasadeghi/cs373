@@ -2,20 +2,22 @@ cmake_minimum_required (VERSION 3.5.1)
 
 project (Exercises NONE)
 
-find_program(COVERAGE coverage)
-message(${COVERAGE})
+message (${CMAKE_SOURCE_DIR})
+
+find_program (COVERAGE coverage)
+message      (${COVERAGE})
 
 find_program (MAKE make)
-message(${MAKE})
+message      (${MAKE})
 
 find_program (MYPY mypy)
-message(${MYPY})
+message      (${MYPY})
 
 find_program (PYLINT pylint)
-message(${PYLINT})
+message      (${PYLINT})
 
 find_program (PYTHON python3)
-message(${PYTHON})
+message      (${PYTHON})
 
 set (FILES
     UnitTests3
@@ -37,28 +39,28 @@ add_custom_command (OUTPUT .pylintrc COMMAND ${PYLINT} --disable=locally-disable
 add_custom_target (run)
 
 add_custom_target (RMSET.pyx
-    COMMAND echo -${PYLINT} ../RMSE.py
-    COMMAND      -${PYLINT} ../RMSE.py
-    COMMAND echo -${PYLINT} ../RMSET.py
-    COMMAND      -${PYLINT} ../RMSET.py
-    COMMAND echo ${PYTHON}  ../RMSET.py
-    COMMAND      ${PYTHON}  ../RMSET.py
+    COMMAND echo -${PYLINT} ${CMAKE_SOURCE_DIR}/RMSE.py
+    COMMAND      -${PYLINT} ${CMAKE_SOURCE_DIR}/RMSE.py
+    COMMAND echo -${PYLINT} ${CMAKE_SOURCE_DIR}/RMSET.py
+    COMMAND      -${PYLINT} ${CMAKE_SOURCE_DIR}/RMSET.py
+    COMMAND echo ${PYTHON}  ${CMAKE_SOURCE_DIR}/RMSET.py
+    COMMAND      ${PYTHON}  ${CMAKE_SOURCE_DIR}/RMSET.py
     DEPENDS .pylintrc)
 add_custom_command (TARGET run
     COMMAND ${MAKE} RMSET.pyx)
 
 foreach (file ${FILES})
     add_custom_target (${file}T.pyx
-        COMMAND echo -${MYPY}                 ../${file}.py
-        COMMAND      -${MYPY}                 ../${file}.py
-        COMMAND echo -${PYLINT}               ../${file}.py
-        COMMAND      -${PYLINT}               ../${file}.py
-        COMMAND echo -${MYPY}                 ../${file}T.py
-        COMMAND      -${MYPY}                 ../${file}T.py
-        COMMAND echo -${PYLINT}               ../${file}T.py
-        COMMAND      -${PYLINT}               ../${file}T.py
-        COMMAND echo ${COVERAGE} run --branch ../${file}T.py
-        COMMAND      ${COVERAGE} run --branch ../${file}T.py
+        COMMAND echo -${MYPY}                 ${CMAKE_SOURCE_DIR}/${file}.py
+        COMMAND      -${MYPY}                 ${CMAKE_SOURCE_DIR}/${file}.py
+        COMMAND echo -${PYLINT}               ${CMAKE_SOURCE_DIR}/${file}.py
+        COMMAND      -${PYLINT}               ${CMAKE_SOURCE_DIR}/${file}.py
+        COMMAND echo -${MYPY}                 ${CMAKE_SOURCE_DIR}/${file}T.py
+        COMMAND      -${MYPY}                 ${CMAKE_SOURCE_DIR}/${file}T.py
+        COMMAND echo -${PYLINT}               ${CMAKE_SOURCE_DIR}/${file}T.py
+        COMMAND      -${PYLINT}               ${CMAKE_SOURCE_DIR}/${file}T.py
+        COMMAND echo ${COVERAGE} run --branch ${CMAKE_SOURCE_DIR}/${file}T.py
+        COMMAND      ${COVERAGE} run --branch ${CMAKE_SOURCE_DIR}/${file}T.py
         COMMAND echo ${COVERAGE} report -m
         COMMAND      ${COVERAGE} report -m
         DEPENDS .pylintrc)
@@ -66,4 +68,6 @@ foreach (file ${FILES})
         COMMAND ${MAKE} ${file}T.pyx)
 endforeach ()
 
-set_property (DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ".coverage" ".mypy_cache")
+set_property (DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES
+    ".coverage"
+    ".mypy_cache")

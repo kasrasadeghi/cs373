@@ -2,39 +2,57 @@ cmake_minimum_required (VERSION 3.8.2)
 
 project (Collatz NONE)
 
-find_program(COVERAGE coverage)
-message(${COVERAGE})
+message (${CMAKE_SOURCE_DIR})
+
+find_program (COVERAGE coverage)
+message      (${COVERAGE})
 
 find_program (MAKE make)
-message(${MAKE})
+message      (${MAKE})
 
 find_program (MYPY mypy)
-message(${MYPY})
+message      (${MYPY})
 
 find_program (PYLINT pylint)
-message(${PYLINT})
+message      (${PYLINT})
 
-enable_testing ()
+find_program (PYTHON python3)
+message      (${PYTHON})
 
 add_custom_command (OUTPUT .pylintrc COMMAND ${PYLINT} --disable=locally-disabled --reports=no --generate-rcfile > .pylintrc)
-add_custom_target  (.pylintrcx DEPENDS .pylintrc)
-add_test           (.pylintrc  ${MAKE} .pylintrcx)
 
-add_test (Collatz.mypy   ${MYPY}   ../Collatz.py)
-add_test (Collatz.pylint ${PYLINT} ../Collatz.py)
+add_custom_target (run)
 
-add_custom_command (OUTPUT RunCollatz.tmp COMMAND ../RunCollatz.py < ../RunCollatz.in > RunCollatz.tmp)
-add_custom_target  (RunCollatz.pyx diff RunCollatz.tmp ../RunCollatz.out DEPENDS RunCollatz.tmp)
+add_custom_target (RunCollatz.pyx
+    COMMAND echo -${MYPY}   ${CMAKE_SOURCE_DIR}/Collatz.py
+    COMMAND      -${MYPY}   ${CMAKE_SOURCE_DIR}/Collatz.py
+    COMMAND echo -${PYLINT} ${CMAKE_SOURCE_DIR}/Collatz.py
+    COMMAND      -${PYLINT} ${CMAKE_SOURCE_DIR}/Collatz.py
+    COMMAND echo -${MYPY}   ${CMAKE_SOURCE_DIR}/RunCollatz.py
+    COMMAND      -${MYPY}   ${CMAKE_SOURCE_DIR}/RunCollatz.py
+    COMMAND echo -${PYLINT} ${CMAKE_SOURCE_DIR}/RunCollatz.py
+    COMMAND      -${PYLINT} ${CMAKE_SOURCE_DIR}/RunCollatz.py
+    COMMAND echo ${PYTHON}  ${CMAKE_SOURCE_DIR}/RunCollatz.py '<' ${CMAKE_SOURCE_DIR}/RunCollatz.in '>' RunCollatz.tmp
+    COMMAND      ${PYTHON}  ${CMAKE_SOURCE_DIR}/RunCollatz.py  <  ${CMAKE_SOURCE_DIR}/RunCollatz.in  >  RunCollatz.tmp
+    COMMAND echo diff RunCollatz.tmp ${CMAKE_SOURCE_DIR}/RunCollatz.out
+    COMMAND      diff RunCollatz.tmp ${CMAKE_SOURCE_DIR}/RunCollatz.out
+    DEPENDS .pylintrc)
+add_custom_command (TARGET run
+    COMMAND ${MAKE} RunCollatz.pyx)
 
-add_test (RunCollatz.mypy   ${MYPY}   ../RunCollatz.py)
-add_test (RunCollatz.pylint ${PYLINT} ../RunCollatz.py)
-add_test (RunCollatz        ${MAKE}      RunCollatz.pyx)
+add_custom_target (TestCollatz.pyx
+    COMMAND echo -${MYPY}                 ${CMAKE_SOURCE_DIR}/TestCollatz.py
+    COMMAND      -${MYPY}                 ${CMAKE_SOURCE_DIR}/TestCollatz.py
+    COMMAND echo -${PYLINT}               ${CMAKE_SOURCE_DIR}/TestCollatz.py
+    COMMAND      -${PYLINT}               ${CMAKE_SOURCE_DIR}/TestCollatz.py
+    COMMAND echo ${COVERAGE} run --branch ${CMAKE_SOURCE_DIR}/TestCollatz.py
+    COMMAND      ${COVERAGE} run --branch ${CMAKE_SOURCE_DIR}/TestCollatz.py
+    COMMAND echo ${COVERAGE} report -m
+    COMMAND      ${COVERAGE} report -m
+    DEPENDS .pylintrc)
+add_custom_command (TARGET run
+    COMMAND ${MAKE} TestCollatz.pyx)
 
-add_custom_command (OUTPUT TestCollatz.tmp COMMAND  ${COVERAGE} run --branch ../TestCollatz.py COMMAND ${COVERAGE} report -m > TestCollatz.tmp)
-add_custom_target  (TestCollatz.pyx DEPENDS TestCollatz.tmp)
-
-add_test (TestCollatz.mypy   ${MYPY}   ../TestCollatz.py)
-add_test (TestCollatz.pylint ${PYLINT} ../TestCollatz.py)
-add_test (TestCollatz        ${MAKE}      TestCollatz.pyx)
-
-set_property (DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES ".coverage" ".mypy_cache")
+set_property (DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES
+    ".coverage"
+    ".mypy_cache")

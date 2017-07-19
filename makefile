@@ -111,6 +111,7 @@ sync:
     --include "MyPy.py"                     \
     --include "Classes.py"                  \
     --include "RegExps.py"                  \
+    --include "Reflection.py"               \
     --exclude "*"                           \
     ../../examples/python/ examples
 	@rsync -r -t -u -v --delete             \
@@ -140,6 +141,7 @@ sync:
 	@rsync -r -t -u -v --delete             \
     --include "MethodOverriding.java"       \
     --include "DynamicBinding.java"         \
+    --include "Reflection.java"             \
     --exclude "*"                           \
     ../../examples/java/ examples
 	@rsync -r -t -u -v --delete             \
@@ -198,6 +200,9 @@ sync:
     --include "SingletonPatternT.java"      \
     --include "SingletonPattern.java"       \
     --include "StrategyPattern7.java"       \
+    --include "StrategyPattern8.java"       \
+    --include "StrategyPattern9.java"       \
+    --include "StrategyPattern9.py"         \
     --exclude "*"                           \
     ../../patterns/java/ patterns
 	@rsync -r -t -u -v --delete             \
