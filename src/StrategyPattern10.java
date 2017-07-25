@@ -99,14 +99,12 @@ class Movie {
     public void setPriceCode (String priceCode) {
         try {
             _price = (Price) Class.forName(priceCode).newInstance();}
-        catch (ClassCastException e) {
+        catch (ClassCastException
+            | ClassNotFoundException
+            | InstantiationException
+            | IllegalAccessException ignored) {
             throw new IllegalArgumentException("Incorrect Price Code");}
-        catch (ClassNotFoundException e) {
-            throw new IllegalArgumentException("Incorrect Price Code");}
-        catch (IllegalAccessException e) {
-            throw new IllegalArgumentException("Incorrect Price Code");}
-        catch (InstantiationException e) {
-            throw new IllegalArgumentException("Incorrect Price Code");}}}
+    }}
 
 class Rental {
     private Movie _movie;
