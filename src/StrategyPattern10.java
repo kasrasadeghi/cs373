@@ -14,11 +14,12 @@ Rename getFrequentRenterPoints() to getPoints()
 */
 
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 interface Price {
-    double getAmount    (int daysRented);
-    int    getPoints    (int daysRented);
-    String getPriceCode ();}              // not used
+    double getAmount(int daysRented);
+    int    getPoints(int daysRented);
+    String getPriceCode();}              // not used
 
 abstract class AbstractPrice implements Price {
     public int getPoints (int daysRented) { // const
@@ -162,15 +163,16 @@ class Customer {
      *         getTitle()
      */
     public String statement () { // O(3n)
-        double amount = 0;
-        for (Rental rental : _rentals)
-            amount += rental.getAmount();
-        int points = 0;
-        for (Rental rental : _rentals)
-            points += rental.getPoints();
-        String result = "Rental Record for " + getName() + "\n";
-        for (Rental rental : _rentals)
-            result += rental.getOutput();
+        double amount = _rentals.stream()
+            .mapToDouble(Rental::getAmount)
+            .sum();
+        int points = _rentals.stream()
+            .mapToInt(Rental::getPoints)
+            .sum();
+        String result = "Rental Record for " + getName() + "\n"
+            + _rentals.stream()
+            .map(Rental::getOutput)
+            .collect(Collectors.joining());
         result += "Amount owed is " + String.valueOf(amount) + "\n";
         result += "You earned " + String.valueOf(points) + " frequent renter points";
         return result;}}
